@@ -11,7 +11,7 @@
 
 ### Notas:
 #### Diferente do projeto realizado no bootcamp, fiz algumas poucas alterações para reforço do aprendizado:
-- A música de fundo é de um canal do youtube que muito adimiro chamado Aviões e Músicas.
+- A música de fundo é de um canal do youtube que muito admiro chamado Aviões e Músicas.
   Disponível em: https://www.youtube.com/user/avioesemusicas
 - Alterei as imagens de fundo do jogo
 - Quanto o som de 'Game Over', atualizei para o mesmo som do jogo Mario <img align="center" height="30" src="https://user-images.githubusercontent.com/67704261/119034556-dc6ec280-b984-11eb-863b-67c3efe8518f.png" />
