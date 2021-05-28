@@ -33,21 +33,43 @@ function start() { // Inicio da função start()
     var somGameover=document.getElementById("somGameover");
     var somPerdido=document.getElementById("somPerdido");
     var somResgate=document.getElementById("somResgate");
+    var acoesJogador = { 
+        87 : moveJogadorParaCima,
+        83 : moveJogadorParaBaixo,
+        68 : disparo}
+    
+    function moveJogadorParaCima() {
+        var topo = parseInt($("#jogador").css("top"));
+        $("#jogador").css("top", topo - 10);
+         //LIMITAÇÃO DO TOPO
+        if (topo <= 0) {
+            $("#jogador").css("top", topo + 10);
+        }
+    }
+    
+    function moveJogadorParaBaixo() {
+        var topo = parseInt($("#jogador").css("top"));
+        $("#jogador").css("top", topo + 10);
+         //LIMITAÇÃO DO FUNDO (SOLO)
+        if (topo >= 434) {
+            $("#jogador").css("top", topo - 10);
+        }
+    }
 
     //MÚSICA EM UM LOOP
     musica.addEventListener("ended", function(){ musica.currentTime = 0; musica.play(); }, false);
     musica.play();
 
-    jogo.pressionou = [];
+    jogo.pressionou = null;
 
 	//VERIFICA SE O USUÁRIO APERTOU ALGUMA TECLA
 	$(document).keydown(function(e){
-        jogo.pressionou[e.which] = true;
+        jogo.pressionou = e.which;
         });
     
     
         $(document).keyup(function(e){
-           jogo.pressionou[e.which] = false;
+            jogo.pressionou = e.which;
         });
     
 	//Game Loop
@@ -76,35 +98,13 @@ function start() { // Inicio da função start()
 	} // fim da função movefundo()
 
     function movejogador() {
-	
-        if (jogo.pressionou[TECLA.W]) {
-            var topo = parseInt($("#jogador").css("top"));
-            $("#jogador").css("top",topo-10);
-
-                //LIMITAÇÃO DO TOPO
-                if (topo<=0) {
-                    $("#jogador").css("top",topo+10);
-                }
-        }
-        
-        if (jogo.pressionou[TECLA.S]) {
-            
-            var topo = parseInt($("#jogador").css("top"));
-            $("#jogador").css("top",topo+10);	
-
-                //LIMITAÇÃO DO FUNDO (SOLO)
-                if (topo>=434) {	
-                    $("#jogador").css("top",topo-10);
-                }
-        }
-        
-        if (jogo.pressionou[TECLA.D]) {
-            
-            //CHAMA A FUNÇÃO DISPARO
-            disparo();	
+        let acaoRealizada = acoesJogador[jogo.pressionou];
+        if(acaoRealizada){
+            acaoRealizada();
+            jogo.pressionou = null;
         }
     
-        } // fim da função movejogador()
+    } // fim da função movejogador()
 
         function moveinimigo1() {
 
